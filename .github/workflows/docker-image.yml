@@ -34,5 +34,5 @@ jobs:
           
           docker tag sre-hw17_app:latest ${{ env.DOCKER_USERNAME }}/sre-hw17_app:$(date +%s)
           docker push ${{ env.DOCKER_USERNAME }}/sre-hw17_app:$(date +%s)
-          docker tag sre-hw17_proxy:latest ${{ env.DOCKER_USERNAME }}/sre-hw17_proxy:
+          docker tag sre-hw17_proxy:latest ${{ env.DOCKER_USERNAME }}/sre-hw17_proxy:$(date +%s)
           docker push ${{ env.DOCKER_USERNAME }}/sre-hw17_proxy:$(date +%s)
