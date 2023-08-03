@@ -18,12 +18,12 @@ jobs:
           python-version: '3.8'
           architecture: 'x64'
       - name: Install requirements
-        run: pip install -r requirements.txt
+        run: pip install -r flask-sqlite3-todo-crud/requirements.txt
       - name: echo workspace
         run: echo $GITHUB_WORKSPACE
         shell: bash
       - name: Run tests
-        run: coverage run src/app_test.py
+        run: coverage run flask-sqlite3-todo-crud/app_test.py
       - name: Tests report
         run: coverage report
   build_and_pub:
