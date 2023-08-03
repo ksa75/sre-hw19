@@ -6,7 +6,7 @@ from prometheus_flask_exporter import PrometheusMetrics
 app = Flask(__name__)
 metrics = PrometheusMetrics(app,export_defaults=False,export_user_defaults=False)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/admkirillov/sre/hw10/flask-sqlite3-todo-crud/todo.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////root/git/sre-hw17/flask-sqlite3-todo-crud/todo.db'
 db = SQLAlchemy(app)
 
 class Todo(db.Model):
