@@ -7,7 +7,7 @@ services:
     ports:
       - "5000:5000"
   proxy:
-    build: nginx
+    build: nginx-todo-crud
     restart: always
     ports:
       - 81:81

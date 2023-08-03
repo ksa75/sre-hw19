@@ -24,16 +24,16 @@ jobs:
           password: ${{ env.DOCKERHUB_TOKEN }}
       - name: Build Docker image
         run: |
-          docker build -t flask-sqlite-todo-crud:latest flask-sqlite3-todo-crud
-          docker build -t nginx-todo-crud:latest nginx-todo-crud
+          docker build -t sre-hw17_app:latest flask-sqlite3-todo-crud
+          docker build -t sre-hw17_proxy:latest nginx-todo-crud
       - name: Push Docker image
         run: |
-          docker tag flask-sqlite-todo-crud:latest ${{ env.DOCKER_USERNAME }}/flask-sqlite-todo-crud:latest
-          docker push ${{ env.DOCKER_USERNAME }}/flask-sqlite-todo-crud:latest
-          docker tag nginx-todo-crud:latest ${{ env.DOCKER_USERNAME }}/nginx-todo-crud:latest
-          docker push ${{ env.DOCKER_USERNAME }}/nginx-todo-crud:latest
+          docker tag sre-hw17_app:latest ${{ env.DOCKER_USERNAME }}/sre-hw17_app:latest
+          docker push ${{ env.DOCKER_USERNAME }}/sre-hw17_app:latest
+          docker tag sre-hw17_proxy:latest ${{ env.DOCKER_USERNAME }}/sre-hw17_proxy:latest
+          docker push ${{ env.DOCKER_USERNAME }}/sre-hw17_proxy:latest
           
-          docker tag flask-sqlite-todo-crud:latest ${{ env.DOCKER_USERNAME }}/flask-sqlite-todo-crud:$(date +%s)
-          docker push ${{ env.DOCKER_USERNAME }}/flask-sqlite-todo-crud:$(date +%s)
-          docker tag nginx-todo-crud:latest ${{ env.DOCKER_USERNAME }}/nginx-todo-crud:
-          docker push ${{ env.DOCKER_USERNAME }}/nginx-todo-crud:$(date +%s)
+          docker tag sre-hw17_app:latest ${{ env.DOCKER_USERNAME }}/sre-hw17_app:$(date +%s)
+          docker push ${{ env.DOCKER_USERNAME }}/sre-hw17_app:$(date +%s)
+          docker tag sre-hw17_proxy:latest ${{ env.DOCKER_USERNAME }}/sre-hw17_proxy:
+          docker push ${{ env.DOCKER_USERNAME }}/sre-hw17_proxy:$(date +%s)
