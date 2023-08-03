@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask import render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
@@ -6,7 +7,12 @@ from prometheus_flask_exporter import PrometheusMetrics
 app = Flask(__name__)
 metrics = PrometheusMetrics(app,export_defaults=False,export_user_defaults=False)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////root/git/sre-hw17/flask-sqlite3-todo-crud/todo.db'
+
+db_path = os.path.join(os.path.dirname(__file__), 'todo.db')
+db_uri = 'sqlite:///{}'.format(db_path)
+app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
+
+
 db = SQLAlchemy(app)
 
 class Todo(db.Model):
