@@ -1,2 +1,2 @@
 #!/bin/bash
-nginx -t
+nginx -t -c nginx-todo-crud/conf
