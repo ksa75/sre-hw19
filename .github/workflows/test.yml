@@ -18,7 +18,7 @@ jobs:
       - name: Install nginx
         run: sudo apt-get install nginx -y
       - name: check nginx config
-        run: sudo nginx -t -c ./nginx-todo-crud/conf
+        run: sudo nginx -t -c nginx-todo-crud/conf
 
       - name: Install requirements
         run: pip install -r flask-sqlite3-todo-crud/requirements.txt
