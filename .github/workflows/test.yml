@@ -23,6 +23,6 @@ jobs:
       - name: Install nginx
         run: sudo apt-get install nginx -y
       - name: check nginx config
-        run: nginx -t -c nginx-todo-crud/conf
-        shell: bash
+        run: sudo nginx -t -c nginx-todo-crud/conf
+
 
