@@ -11,18 +11,20 @@ jobs:
         with:
           python-version: '3.8'
           architecture: 'x64'
-      - name: Install requirements
-        run: pip install -r flask-sqlite3-todo-crud/requirements.txt
       - name: echo workspace
-        run: echo $GITHUB_WORKSPACE
+        run: echo $GITHUB_WORKSPACE && pwd && ls
         shell: bash
-      - name: Run tests
-        run: coverage run flask-sqlite3-todo-crud/test.py
-      - name: Tests report
-        run: coverage report
+
       - name: Install nginx
         run: sudo apt-get install nginx -y
       - name: check nginx config
         run: sudo nginx -t -c nginx-todo-crud/conf
+
+      - name: Install requirements
+        run: pip install -r flask-sqlite3-todo-crud/requirements.txt
+      - name: Run tests
+        run: coverage run flask-sqlite3-todo-crud/test.py
+      - name: Tests report
+        run: coverage report
 
 
