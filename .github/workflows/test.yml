@@ -20,6 +20,8 @@ jobs:
         run: coverage run flask-sqlite3-todo-crud/test.py
       - name: Tests report
         run: coverage report
+      - name: Install nginx
+        run: apt-get install nginx -y
       - name: check nginx config
         run: nginx-todo-crud/test.sh
         shell: bash
