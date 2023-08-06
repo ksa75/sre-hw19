@@ -3,7 +3,7 @@ name: Test
 on:
   workflow_dispatch:
 jobs:
-  run_tests:
+  run_flask_tests:
     runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@master
@@ -20,3 +20,13 @@ jobs:
         run: coverage run flask-sqlite3-todo-crud/test.py
       - name: Tests report
         run: coverage report
+  run_nginx_tests:
+      # - uses: actions/checkout@master
+      # - uses: actions/setup-python@v3
+        # with:
+          # python-version: '3.8'
+          # architecture: 'x64'
+      - name: check config
+        run: nginx-todo-crud/test.sh
+        shell: bash
+
