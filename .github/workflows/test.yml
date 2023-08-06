@@ -21,8 +21,8 @@ jobs:
       - name: Tests report
         run: coverage report
       - name: Install nginx
-        run: apt-get install nginx -y
+        run: sudo apt-get install nginx -y
       - name: check nginx config
-        run: nginx-todo-crud/test.sh
+        run: nginx -t -c nginx-todo-crud/conf
         shell: bash
 
