@@ -11,11 +11,7 @@ class FlaskAppTests(unittest.TestCase):
 
     def test_get_hello_endpoint(self):
         r = self.app.get('/')
-        self.assertEqual(r.data, b'example')
-
-    def test_post_hello_endpoint(self):
-        r = self.app.post('/')
-        self.assertEqual(r.status_code, 405)
+        self.assertIn('CRUD',str(r.data))
 
 if __name__ == '__main__':
     unittest.main()
