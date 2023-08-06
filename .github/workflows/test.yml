@@ -12,13 +12,13 @@ jobs:
           python-version: '3.8'
           architecture: 'x64'
       - name: echo workspace
-        run: echo $GITHUB_WORKSPACE && pwd && ls
+        run: echo $GITHUB_WORKSPACE
         shell: bash
 
       - name: Install nginx
         run: sudo apt-get install nginx -y
       - name: check nginx config
-        run: sudo nginx -t -c /home/runner/work/sre-hw19/sre-hw19/nginx-todo-crud/conf
+        run: cp /home/runner/work/sre-hw19/sre-hw19/nginx-todo-crud/conf /etc/nginx/conf.d/default.conf && sudo nginx -t
 
       - name: Install requirements
         run: pip install -r flask-sqlite3-todo-crud/requirements.txt
