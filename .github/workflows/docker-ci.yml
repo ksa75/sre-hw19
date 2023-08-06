@@ -1,0 +1,55 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
+
+jobs:
+  run_pub_tests:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.8'
+          architecture: 'x64'
+      - name: Install requirements
+        run: pip install -r flask-sqlite3-todo-crud/requirements.txt
+      - name: echo workspace
+        run: echo $GITHUB_WORKSPACE
+        shell: bash
+      - name: Run tests
+        run: coverage run flask-sqlite3-todo-crud/test.py
+      - name: Tests report
+        run: coverage report
+  build_and_pub:
+    needs: [run_pub_tests]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build Docker image
+        run: |
+          docker build -t sre-hw17_app:latest flask-sqlite3-todo-crud
+          docker build -t sre-hw17_proxy:latest nginx-todo-crud
+      - name: Push Docker image
+        run: |
+          docker tag sre-hw17_app:latest ${{ env.DOCKER_USERNAME }}/sre-hw17_app:latest
+          docker push ${{ env.DOCKER_USERNAME }}/sre-hw17_app:latest
+          docker tag sre-hw17_proxy:latest ${{ env.DOCKER_USERNAME }}/sre-hw17_proxy:latest
+          docker push ${{ env.DOCKER_USERNAME }}/sre-hw17_proxy:latest
+          
+          docker tag sre-hw17_app:latest ${{ env.DOCKER_USERNAME }}/sre-hw17_app:$(date +%s)
+          docker push ${{ env.DOCKER_USERNAME }}/sre-hw17_app:$(date +%s)
+          docker tag sre-hw17_proxy:latest ${{ env.DOCKER_USERNAME }}/sre-hw17_proxy:$(date +%s)
+          docker push ${{ env.DOCKER_USERNAME }}/sre-hw17_proxy:$(date +%s)

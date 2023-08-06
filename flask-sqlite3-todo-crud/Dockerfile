@@ -1,5 +1,5 @@
 FROM python:3-alpine
-MAINTAINER Sergey Kirillov 'kirillov-sa@yandex.ru'
+LABEL org.opencontainers.image.authors="kirillov-sa@yandex.ru"
 # Create app directory
 WORKDIR /app
  
