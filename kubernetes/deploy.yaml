@@ -1,0 +1,68 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    hw20: crud-frontend
+  name: crud-frontend
+  namespace: sre-hw20
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      hw20: crud-frontend
+  template:
+    metadata:
+      labels:
+        hw20: crud-frontend
+    spec:
+      containers:
+      - image: ksa75/sre-hw17_proxy:latest
+        name: crud-frontend
+        ports:
+        - containerPort: 81
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    hw20: crud-frontend
+  name: crud-frontend
+  namespace: sre-hw20
+spec:
+  ports:
+  - name: "81"
+    port: 81
+    targetPort: 81
+  selector:
+    hw20: crud-frontend
+  type: LoadBalancer
+########################
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    hw20: crud-backend
+  name: crud-backend
+  namespace: sre-hw20
+spec:
+  containers:
+  - image: ksa75/sre-hw17_app:latest
+    name: crud-backend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    hw20: crud-backend
+  name: crud-backend
+  namespace: sre-hw20
+spec:
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    hw20: crud-backend
+  type: ClusterIP
