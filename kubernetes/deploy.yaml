@@ -17,7 +17,7 @@ spec:
         hw20: crud-frontend
     spec:
       containers:
-      - image: ksa75/sre-hw17_proxy:latest
+      - image: ksa75/sre-hw19_proxy:latest
         name: crud-frontend
         ports:
         - containerPort: 81
@@ -48,7 +48,7 @@ metadata:
   namespace: sre-hw20
 spec:
   containers:
-  - image: ksa75/sre-hw17_app:latest
+  - image: ksa75/sre-hw19_app:latest
     name: crud-backend
 ---
 apiVersion: v1
